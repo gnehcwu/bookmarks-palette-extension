@@ -1,0 +1,34 @@
+.form {
+  margin-right: 16px;
+  padding-bottom: 8px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 1px solid var(--bp-extension-separator) !important;
+}
+
+.input {
+  box-shadow: none !important;
+  outline: none !important;
+  border: none !important;
+  border: none;
+  outline: none !important;
+  font-family: var(--bp-extension-font-sans) !important;
+  caret-color: var(--bp-extension-brand);
+
+  width: 100%;
+  margin: 0 !important;
+  padding: 8px !important;
+  font-size: 1.85em !important;
+  color: var(--bp-extension-text-primary) !important;
+  background-color: transparent !important;
+}
+
+input::placeholder {
+  color: var(--bp-extension-text-info) !important;
+}
+
+input:focus,
+input:active {
+  outline: none !important;
+}

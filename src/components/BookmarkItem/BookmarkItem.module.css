@@ -1,0 +1,55 @@
+.bookmarkItem {
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 16px;
+  background: transparent;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+.bookmarkContent,
+.domainContent {
+  color: var(--bp-extension-text-primary);
+  font-size: 1.55em;
+  user-select: none;
+
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.domainContent {
+  opacity: 0.75;
+  font-size: 1.25em;
+  color: var(--bp-extension-text-secondary);
+}
+
+.paths {
+  justify-self: end;
+  display: flex;
+  grid-column-gap: 8px;
+  align-items: center;
+  font-size: 1.1em;
+  color: var(--bp-extension-text-secondary);
+}
+
+.path {
+  background-color: var(--bp-extension-surface-info);
+  border-radius: 4px;
+  padding: 6px;
+  font-size: 1.15em;
+  white-space: nowrap;
+}

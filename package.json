@@ -1,0 +1,38 @@
+{
+  "name": "bookmark-palette-extension",
+  "version": "0.0.1",
+  "description": "Browser extension to search bookmarks by title, domain",
+  "scripts": {
+    "start": "parcel watch src/manifest.json --host localhost",
+    "build": "parcel build src/manifest.json",
+    "new-component": "new-component"
+  },
+  "keywords": [
+    "Browser",
+    "extension"
+  ],
+  "author": "Cheng Wu",
+  "license": "ISC",
+  "dependencies": {
+    "fuse.js": "^6.6.2",
+    "prop-types": "^15.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-focus-lock": "^2.9.4",
+    "react-remove-scroll": "^2.5.5"
+  },
+  "devDependencies": {
+    "@parcel/config-webextension": "^2.8.3",
+    "@types/chrome": "0.0.224",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "new-component": "^5.0.2",
+    "parcel": "^2.8.3",
+    "prettier": "^2.8.6",
+    "process": "^0.11.10"
+  }
+}

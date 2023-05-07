@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "Bookmarks palette",
+  "version": "0.0.1",
+  "description": "Search and navigate bookmarks by title, domain with a simple command palette interface.",
+  "icons": {
+    "16": "./assets/icon.png",
+    "32": "./assets/icon.png",
+    "48": "./assets/icon.png",
+    "128": "./assets/icon.png"
+  },
+  "background": {
+    "service_worker": "scripts/background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "run_at": "document_end",
+      "js": ["scripts/content.js"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "./assets/icon.png",
+      "32": "./assets/icon.png",
+      "48": "./assets/icon.png",
+      "128": "./assets/icon.png"
+    }
+  },
+  "commands": {
+    "toggle-bookmarks-palette": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "mac": "Alt+B"
+      },
+      "description": "Open bookmarks palette"
+    }
+  },
+  "permissions": ["tabs", "activeTab", "bookmarks"]
+}
