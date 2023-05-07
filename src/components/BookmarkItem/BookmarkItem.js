@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Highlight from '../Highlight';
+import Favicon from '../Favicon/Favicon';
 import * as styles from './BookmarkItem.module.css';
 
 BookmarkItem.propTypes = {
@@ -10,6 +11,7 @@ BookmarkItem.propTypes = {
       title: PropTypes.string,
       path: PropTypes.string,
       domain: PropTypes.string,
+      url: PropTypes.string,
     }),
     matches: PropTypes.arrayOf(
       PropTypes.shape({
@@ -24,7 +26,7 @@ BookmarkItem.propTypes = {
 
 function BookmarkItem({ bookmark, active, handleClickBookmark, handleSelectBookmark }) {
   const {
-    item: { title, path, domain },
+    item: { title, path, domain, url },
     matches = [],
   } = bookmark;
 
@@ -33,7 +35,7 @@ function BookmarkItem({ bookmark, active, handleClickBookmark, handleSelectBookm
 
     return paths.map((subPath, index) => {
       return (
-        <span key={index} className={styles.path}>
+        <span key={index} id={styles.bpPath}>
           {subPath}
         </span>
       );
@@ -52,18 +54,20 @@ function BookmarkItem({ bookmark, active, handleClickBookmark, handleSelectBookm
 
   return (
     <li
+      id={styles.bpBookmarkItem}
+      className={`${active ? styles.bpActive : ''}`}
       role="option"
       aria-selected={active ? true : false}
-      className={`${styles.bookmarkItem}`}
       onClick={handleClickBookmark}
       onKeyDown={handleClickBookmark}
       onMouseEnter={handleSelectBookmark}
     >
-      <div className={styles.content}>
-        <span className={styles.bookmarkContent}>{renderContent('title')}</span>
-        <span className={styles.domainContent}>{renderContent('domain')}</span>
+      <Favicon url={url} />
+      <div id={styles.bpContent}>
+        <span id={styles.bpBookmarkContent}>{renderContent('title')}</span>
+        <span id={styles.bpDomainContent}>{renderContent('domain')}</span>
       </div>
-      <div className={styles.paths}>{renderPaths()}</div>
+      <div id={styles.bpPaths}>{renderPaths()}</div>
     </li>
   );
 }

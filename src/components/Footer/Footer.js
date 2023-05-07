@@ -16,20 +16,20 @@ function Footer({ filteredBookmarkCount = DEFAULT_RECORDS_SHOWN, totalBookmarkCo
   )} / ${totalBookmarkCount}`;
 
   return (
-    <div className={styles.footer}>
-      <div className={styles.result}>
-        <span className={styles.resultInfo}>{searchedResult}</span> results
+    <div id={styles.bpFooter}>
+      <div id={styles.bpResult}>
+        <span id={styles.bpResultInfo}>{searchedResult}</span> results
       </div>
-      <div className={styles.action}>
-        <div className={styles.mark}>
-          <span className={styles.markTextSign}>ESC</span> to close
+      <div id={styles.bpAction}>
+        <div id={styles.bpMark}>
+          <span id={styles.bpMarkTextSign}>ESC</span> to close
         </div>
-        <div className={styles.mark}>
-          <span className={styles.markSign}>⏎</span> to open
+        <div id={styles.bpMark}>
+          <span id={styles.bpMarkSign}>⏎</span> to open
         </div>
-        <div className={styles.mark}>
-          <span className={styles.markSign}>↑</span>
-          <span className={styles.markSign}>↓</span> to navigate
+        <div id={styles.bpMark}>
+          <span id={styles.bpMarkSign}>↑</span>
+          <span id={styles.bpMarkSign}>↓</span> to navigate
         </div>
       </div>
     </div>

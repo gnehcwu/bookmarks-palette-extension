@@ -69,26 +69,19 @@
   }
 }
 
-.bpWrapper *,
-.bpWrapper :after,
-.bpWrapper :before {
+#bpWrapper *,
+#bpWrapper :after,
+#bpWrapper :before {
   box-sizing: border-box;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .bpWrapper {
+  #bpWrapper {
     scroll-behavior: smooth;
   }
 }
 
-@font-face {
-  font-family: 'BLOKK';
-  src: local('BLOKK Neue');
-  font-weight: normal;
-  font-style: normal;
-}
-
-.bpWrapper {
+#bpWrapper {
   color-scheme: light;
   all: initial;
   -webkit-text-size-adjust: none;
@@ -104,24 +97,17 @@
   font-family: var(--bp-extension-font-sans) !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  .bpWrapper {
-    color-scheme: dark;
-  }
-}
-
-.backdrop {
+#bpBackdrop {
   position: absolute;
   inset: 0;
   background-color: var(--bp-extension-surface-backdrop);
   transition: background-color 600ms ease-in;
 }
 
-.palette {
+#bpPalette {
   position: relative;
   background-color: var(--bp-extension-surface-primary);
-  border-radius: 8px;
-  padding: 16px 0px 0 16px;
+  border-radius: 12px;
   box-shadow: var(--bp-extension-shadow-strength);
   animation-duration: 125ms;
   width: min(789px, 100vw);
@@ -135,7 +121,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .palette {
+  #bpWrapper {
+    color-scheme: dark;
+  }
+
+  #bpPalette {
     border: 1px solid var(--bp-extension-separator);
   }
 }

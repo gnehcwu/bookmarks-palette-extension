@@ -1,13 +1,13 @@
-.form {
-  margin-right: 16px;
-  padding-bottom: 8px;
+#bpFilterForm {
+  position: relative;
+  margin: 0px;
   display: flex;
   justify-content: start;
   align-items: center;
-  border-bottom: 1px solid var(--bp-extension-separator) !important;
+  border-bottom: 1px solid var(--bp-extension-separator);
 }
 
-.input {
+#bpFilterInput {
   box-shadow: none !important;
   outline: none !important;
   border: none !important;
@@ -17,18 +17,18 @@
   caret-color: var(--bp-extension-brand);
 
   width: 100%;
-  margin: 0 !important;
+  margin: 16px 16px 8px 16px !important;
   padding: 8px !important;
   font-size: 1.85em !important;
   color: var(--bp-extension-text-primary) !important;
   background-color: transparent !important;
 }
 
-input::placeholder {
+#bpFilterInput::placeholder {
   color: var(--bp-extension-text-info) !important;
 }
 
-input:focus,
-input:active {
+#bpFilterInput:focus,
+#bpFilterInput:active {
   outline: none !important;
 }

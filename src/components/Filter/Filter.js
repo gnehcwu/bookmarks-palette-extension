@@ -24,10 +24,11 @@ function Filter({ filter, handleFilterChange }) {
   useKeyDown('ArrowUp', disableArrowUpDownKeys);
 
   return (
-    <form className={styles.form}>
+    <form id={styles.bpFilterForm}>
       <input
+        id={styles.bpFilterInput}
         type="text"
-        className={styles.input}
+        autoComplete="off"
         placeholder={'Type to search bookmarks by title, domain'}
         value={filter}
         onChange={handleInput}

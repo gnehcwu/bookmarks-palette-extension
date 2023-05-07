@@ -7,8 +7,8 @@ const filterOptions = {
   shouldSort: true,
   includeMatches: true,
   findAllMatches: false,
+  threshold: 0.45,
   minMatchCharLength: DEFAULT_MINIMUM_MATCH,
-  threshold: 0.5,
   keys: [
     {
       name: 'title',
@@ -36,5 +36,5 @@ export default function search(source, pattern) {
   }
 
   const fuse = new Fuse(source, filterOptions);
-  return fuse.search(pattern);
+  return fuse.search(pattern).slice(0, DEFAULT_RECORDS_SHOWN);
 }

@@ -1,0 +1,20 @@
+.bpLoadingCircle {
+  display: inline-block;
+  border: 2px solid var(--bp-extension-surface-info);
+  border-top-color: var(--bp-extension-brand);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  border-width: 1.5px;
+  animation: loadingCircle 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes loadingCircle {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

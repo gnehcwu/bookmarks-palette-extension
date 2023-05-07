@@ -15,22 +15,15 @@ BookmarkList.propTypes = {
     }),
   ),
   selected: PropTypes.number,
-  handleSelect: PropTypes.func,
+  onSelectChanged: PropTypes.func,
 };
 
-function BookmarkList({ bookmarks, selected, handleSelect }) {
+function BookmarkList({ bookmarks, selected, onSelectChanged }) {
   const bookmarkListRef = React.useRef(null);
-  const [highlightStyle, setHighlightStyle] = React.useState(null);
-
-  const updateHighlight = React.useCallback((bookmark) => {
-    const { offsetTop: elementOffsetTop, clientHeight: elementClientHeight } = bookmark;
-    setHighlightStyle({
-      transform: `translateY(${elementOffsetTop}px)`,
-      height: `${elementClientHeight}px`,
-    });
-  }, []);
 
   const scrollBookmarkIntoView = React.useCallback((bookmark) => {
+    if (!bookmark || !bookmarkListRef.current) return;
+
     const { offsetTop: elementOffsetTop, clientHeight: elementClientHeight } = bookmark;
     const { scrollTop: listScrollTop, clientHeight: listClientHeight } = bookmarkListRef.current;
     const needToScroll =
@@ -51,7 +44,7 @@ function BookmarkList({ bookmarks, selected, handleSelect }) {
       nextIndex = bookmarks.length - 1;
     }
 
-    handleSelect(nextIndex);
+    onSelectChanged(nextIndex);
   }
 
   function handleClickBookmark(event) {
@@ -70,26 +63,26 @@ function BookmarkList({ bookmarks, selected, handleSelect }) {
   function handleSelectBookmark(event, index) {
     event.preventDefault();
 
-    handleSelect(index);
+    onSelectChanged(index);
   }
 
   React.useEffect(() => {
+    if (!bookmarks || bookmarks.length <= 0) return;
+
     const allRenderedBookmarks = bookmarkListRef.current.querySelectorAll('li');
     const selectedBookmark = allRenderedBookmarks[selected];
     scrollBookmarkIntoView(selectedBookmark);
-    updateHighlight(selectedBookmark);
-  }, [selected, bookmarks, scrollBookmarkIntoView, updateHighlight]);
+  }, [selected, bookmarks, scrollBookmarkIntoView]);
 
   useKeyDown('ArrowDown', handleNavigation);
   useKeyDown('ArrowUp', handleNavigation);
 
   if (!bookmarks || bookmarks.length <= 0) {
-    return <p className={styles.empty}>🔍 No results</p>;
+    return <p id={styles.bpEmpty}>🔍 No results</p>;
   }
 
   return (
-    <ul className={styles.bookmarkList} ref={bookmarkListRef} role="group">
-      <div className={styles.highlight} style={highlightStyle}></div>
+    <ul id={styles.bpBookmarkList} ref={bookmarkListRef} role="group">
       {bookmarks.map((bookmark, index) => {
         return (
           <BookmarkItem

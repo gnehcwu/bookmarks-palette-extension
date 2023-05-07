@@ -1,6 +1,5 @@
-.footer {
-  padding: 16px 8px;
-  margin-right: 16px;
+#bpFooter {
+  padding: 16px;
   border-top: 1px solid var(--bp-extension-separator);
   color: var(--bp-extension-text-secondary);
 
@@ -11,14 +10,14 @@
   justify-content: right;
 }
 
-.action {
+#bpAction {
   display: grid;
   grid-template-columns: repeat(3, auto);
   column-gap: 24px;
   justify-content: right;
 }
 
-.result {
+#bpResult {
   display: flex;
   align-items: center;
   column-gap: 4px;
@@ -26,20 +25,20 @@
   font-size: 1.25em;
 }
 
-.resultInfo {
+#bpResultInfo {
   color: var(--bp-extension-brand);
   font-weight: 600;
 }
 
-.mark {
+#bpMark {
   display: grid;
   grid-auto-flow: column;
   column-gap: 6px;
   align-items: center;
 }
 
-.markSign,
-.markTextSign {
+#bpMarkSign,
+#bpMarkTextSign {
   padding: 3px 5px;
   font-size: 1.15em;
   display: inline-grid;
@@ -49,7 +48,7 @@
   line-height: 100%;
 }
 
-.markTextSign {
+#bpMrkTextSign {
   font-size: 0.85em;
   padding: 5px;
 }

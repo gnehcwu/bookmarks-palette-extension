@@ -7,7 +7,6 @@ import BookmarkList from '../BookmarkList';
 import Footer from '../Footer';
 import useKeyDown from '../../hooks/useKeyDown';
 import useChromeMessage from '../../hooks/useChromeMessage';
-import navigateTo from '../../utils/navigate';
 import search from '../../utils/search';
 import messageBackground from '../../utils/messageBackground';
 import * as styles from './Palette.module.css';
@@ -24,7 +23,7 @@ function Palette() {
     setSelected(0);
   }
 
-  function handleSelect(nextSelect) {
+  function handleSelectChange(nextSelect) {
     setSelected(nextSelect);
   }
 
@@ -52,14 +51,14 @@ function Palette() {
 
     if (url) {
       dismissPalette();
-      navigateTo(url);
+      messageBackground({ action: 'bp-open-bookmark-from-palette', url });
     }
   }
 
   const trimmedFilter = filter.trim();
 
   React.useEffect(() => {
-    messageBackground({ action: 'search-bookmarks' })
+    messageBackground({ action: 'bp-search-bookmarks' })
       .then((response) => {
         if (response && response.bookmarks) {
           setTotalBookmarkCount(response.bookmarks.length);
@@ -68,29 +67,30 @@ function Palette() {
       })
       .catch((error) => {
         console.error(error);
-      });
+      })
+      .finally(() => {});
   }, [trimmedFilter]);
 
   // Dismiss plugin content when Escape key been pressed
   useKeyDown('Escape', dismissPalette);
   useKeyDown('Enter', handleAction);
 
-  // Toggle plugin content modal when toggle-bookmarks-palette message been sent
-  useChromeMessage('toggle-bookmarks-palette', togglePalette);
+  // Toggle plugin content modal when bp-toggle-bookmarks-palette message been sent
+  useChromeMessage('bp-toggle-bookmarks-palette', togglePalette);
 
   if (!isShown) return null;
 
   return (
     <FocusLock returnFocus={true}>
       <RemoveScroll>
-        <div className={styles.bpWrapper}>
-          <div className={styles.backdrop} onClick={dismissPalette}></div>
-          <div className={styles.palette}>
+        <div id={styles.bpWrapper}>
+          <div id={styles.bpBackdrop} onClick={dismissPalette}></div>
+          <div id={styles.bpPalette}>
             <Filter filter={filter} handleFilterChange={handleFilterChange} />
             <BookmarkList
               bookmarks={filteredBookmarks}
               selected={selected}
-              handleSelect={handleSelect}
+              onSelectChanged={handleSelectChange}
             />
             <Footer
               filteredBookmarkCount={filteredBookmarks.length}

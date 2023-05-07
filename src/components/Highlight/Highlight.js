@@ -23,7 +23,7 @@ function Highlight({ indices, source }) {
       // Wrap the current match in a span and push it to the result array
       const matched = str.slice(start, end + 1);
       result.push(
-        <span key={start} className={styles.highlight}>
+        <span key={start} id={styles.bpHighlight}>
           {matched}
         </span>,
       );

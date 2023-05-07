@@ -47,18 +47,18 @@ async function notifyContent(action) {
 
 // Listener for clicking on extension icon
 chrome.action.onClicked.addListener(function () {
-  notifyContent('toggle-bookmarks-palette');
+  notifyContent('bp-toggle-bookmarks-palette');
 });
 
 // Listener for registered command
 chrome.commands.onCommand.addListener((command) => {
-  if (command === 'toggle-bookmarks-palette') {
-    notifyContent('toggle-bookmarks-palette');
+  if (command === 'bp-toggle-bookmarks-palette') {
+    notifyContent('bp-toggle-bookmarks-palette');
   }
 });
 
 chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
-  if (request.action === 'search-bookmarks') {
+  if (request.action === 'bp-search-bookmarks') {
     extractBookmarks()
       .then((bookmarks) => {
         sendResponse({ bookmarks });
@@ -69,5 +69,13 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
 
     // To keep message channel alive until response returned
     return true;
+  }
+});
+
+chrome.runtime.onMessage.addListener((request) => {
+  const { action, url } = request || {};
+
+  if (action === 'bp-open-bookmark-from-palette') {
+    chrome.tabs.create({ url, active: true });
   }
 });
