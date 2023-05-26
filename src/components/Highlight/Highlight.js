@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import * as styles from './Highlight.module.css';
+import styled from 'styled-components';
 
 Highlight.propTypes = {
   indices: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
   source: PropTypes.string,
 };
+
+const HighlightContent = styled.span`
+  color: var(--bp-extension-brand);
+`;
 
 function Highlight({ indices, source }) {
   const wrapIndicesInSpan = React.useCallback((indicesArr, str) => {
@@ -22,11 +25,7 @@ function Highlight({ indices, source }) {
 
       // Wrap the current match in a span and push it to the result array
       const matched = str.slice(start, end + 1);
-      result.push(
-        <span key={start} id={styles.bpHighlight}>
-          {matched}
-        </span>,
-      );
+      result.push(<HighlightContent key={start}>{matched}</HighlightContent>);
 
       currentIndex = end + 1;
     }

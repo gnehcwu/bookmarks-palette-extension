@@ -1,10 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import * as styles from './Favicon.module.css';
 
 Favicon.propTypes = {
   url: PropTypes.string,
 };
+
+const Icon = styled.img`
+  --favicon-size: 18px;
+  width: var(--favicon-size);
+  height: var(--favicon-size);
+`;
 
 function Favicon({ url }) {
   function faviconURL(pageUrl) {
@@ -14,7 +20,7 @@ function Favicon({ url }) {
     return faviconUrl.toString();
   }
 
-  return <img id={styles.bpFavicon} src={faviconURL(url)} alt="bookmark favicon" />;
+  return <Icon src={faviconURL(url)} alt="bookmark favicon" />;
 }
 
-export default Favicon;
+export default React.memo(Favicon);

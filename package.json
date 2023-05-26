@@ -1,6 +1,6 @@
 {
   "name": "bookmark-palette-extension",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Browser extension to search bookmarks by title, domain",
   "scripts": {
     "start": "parcel watch src/manifest.json --host localhost",
@@ -19,10 +19,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-focus-lock": "^2.9.4",
-    "react-remove-scroll": "^2.5.5"
+    "styled-components": "^5.3.10"
   },
   "devDependencies": {
     "@parcel/config-webextension": "^2.8.3",
+    "@parcel/transformer-inline-string": "^2.8.3",
     "@types/chrome": "0.0.224",
     "eslint": "^8.36.0",
     "eslint-config-prettier": "^8.8.0",

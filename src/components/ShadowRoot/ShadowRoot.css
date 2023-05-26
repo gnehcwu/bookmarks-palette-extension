@@ -1,4 +1,4 @@
-:root {
+:host {
   --bp-extension-font-sans: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans,
     sans-serif, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, sans-serif;
   --bp-extension-shadow-color: 220 3% 15%;
@@ -40,7 +40,7 @@
   --bp-extension-shadow-strength-dark: 6%;
 }
 
-:root {
+:host {
   /* set defaults */
   --bp-extension-brand: var(--bp-extension-brand-light);
   --bp-extension-text-primary: var(--bp-extension-text-primary-light);
@@ -55,7 +55,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :host {
     --bp-extension-brand: var(--bp-extension-brand-dark);
     --bp-extension-text-primary: var(--bp-extension-text-primary-dark);
     --bp-extension-text-secondary: var(--bp-extension-text-secondary-dark);
@@ -66,66 +66,5 @@
     --bp-extension-surface-content: var(--bp-extension-surface-content-dark);
     --bp-extension-separator: var(--bp-extension-separator-dark);
     --bp-extension-shadow-strength: var(--bp-extension-shadow-strength-dark);
-  }
-}
-
-#bpWrapper *,
-#bpWrapper :after,
-#bpWrapper :before {
-  box-sizing: border-box;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  #bpWrapper {
-    scroll-behavior: smooth;
-  }
-}
-
-#bpWrapper {
-  color-scheme: light;
-  all: initial;
-  -webkit-text-size-adjust: none;
-  accent-color: var(--bp-extension-brand);
-  block-size: 100%;
-  caret-color: var(--bp-extension-brand);
-
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-content: center;
-  z-index: var(--bp-extension-layer-important);
-  font-family: var(--bp-extension-font-sans) !important;
-}
-
-#bpBackdrop {
-  position: absolute;
-  inset: 0;
-  background-color: var(--bp-extension-surface-backdrop);
-  transition: background-color 600ms ease-in;
-}
-
-#bpPalette {
-  position: relative;
-  background-color: var(--bp-extension-surface-primary);
-  border-radius: 12px;
-  box-shadow: var(--bp-extension-shadow-strength);
-  animation-duration: 125ms;
-  width: min(789px, 100vw);
-  height: 520px;
-  box-shadow: var(--bp-extension-shadow);
-
-  display: grid;
-  grid-template-rows: min-content 1fr min-content;
-
-  font-size: 10px !important; /* set base font size for extension to avoid interference from page content*/
-}
-
-@media (prefers-color-scheme: dark) {
-  #bpWrapper {
-    color-scheme: dark;
-  }
-
-  #bpPalette {
-    border: 1px solid var(--bp-extension-separator);
   }
 }

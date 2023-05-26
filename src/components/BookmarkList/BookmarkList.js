@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import useKeyDown from '../../hooks/useKeyDown';
 import BookmarkItem from '../BookmarkItem/BookmarkItem';
-import * as styles from './BookmarkList.module.css';
 
 BookmarkList.propTypes = {
   bookmarks: PropTypes.arrayOf(
@@ -15,56 +14,51 @@ BookmarkList.propTypes = {
     }),
   ),
   selected: PropTypes.number,
-  onSelectChanged: PropTypes.func,
+  onSelectChange: PropTypes.func,
+  onClickBookmark: PropTypes.func,
 };
 
-function BookmarkList({ bookmarks, selected, onSelectChanged }) {
+const Bookmarks = styled.ul`
+  overflow-x: hidden;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0px;
+  padding: 8px 10px;
+  width: 100%;
+
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  scroll-padding-block: 8px;
+  overscroll-behavior: contain;
+`;
+
+const EmptyState = styled.p`
+  color: var(--bp-extension-text-info);
+  font-size: 2em;
+  font-weight: 600px;
+  display: grid;
+  place-content: center;
+`;
+
+function BookmarkList({ bookmarks, selected, onSelectChange, onClickBookmark }) {
   const bookmarkListRef = React.useRef(null);
 
-  const scrollBookmarkIntoView = React.useCallback((bookmark) => {
-    if (!bookmark || !bookmarkListRef.current) return;
+  const scrollBookmarkIntoView = React.useCallback((bookmarkElement) => {
+    if (!bookmarkElement || !bookmarkListRef.current) return;
 
-    const { offsetTop: elementOffsetTop, clientHeight: elementClientHeight } = bookmark;
+    const { offsetTop: elementOffsetTop, clientHeight: elementClientHeight } = bookmarkElement;
     const { scrollTop: listScrollTop, clientHeight: listClientHeight } = bookmarkListRef.current;
     const needToScroll =
       elementOffsetTop + elementClientHeight > listScrollTop + listClientHeight ||
       elementOffsetTop - elementClientHeight < listScrollTop;
 
     if (needToScroll) {
-      bookmark.scrollIntoView({ block: 'nearest' });
+      bookmarkElement.scrollIntoView({ block: 'nearest' });
     }
   }, []);
-
-  function handleNavigation(event) {
-    const isArrowDown = event.key === 'ArrowDown';
-    let nextIndex = isArrowDown ? selected + 1 : selected - 1;
-    if (nextIndex >= bookmarks.length) {
-      nextIndex = 0;
-    } else if (nextIndex < 0) {
-      nextIndex = bookmarks.length - 1;
-    }
-
-    onSelectChanged(nextIndex);
-  }
-
-  function handleClickBookmark(event) {
-    if (event.key === 'Enter') return;
-
-    event.preventDefault();
-    event.target.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Enter',
-        bubbles: true,
-        cancelable: true,
-      }),
-    );
-  }
-
-  function handleSelectBookmark(event, index) {
-    event.preventDefault();
-
-    onSelectChanged(index);
-  }
 
   React.useEffect(() => {
     if (!bookmarks || bookmarks.length <= 0) return;
@@ -74,27 +68,24 @@ function BookmarkList({ bookmarks, selected, onSelectChanged }) {
     scrollBookmarkIntoView(selectedBookmark);
   }, [selected, bookmarks, scrollBookmarkIntoView]);
 
-  useKeyDown('ArrowDown', handleNavigation);
-  useKeyDown('ArrowUp', handleNavigation);
-
   if (!bookmarks || bookmarks.length <= 0) {
-    return <p id={styles.bpEmpty}>🔍 No results</p>;
+    return <EmptyState>🔍 No results</EmptyState>;
   }
 
   return (
-    <ul id={styles.bpBookmarkList} ref={bookmarkListRef} role="group">
+    <Bookmarks ref={bookmarkListRef} role="group">
       {bookmarks.map((bookmark, index) => {
         return (
           <BookmarkItem
             key={bookmark.item.id}
             active={index === selected}
             bookmark={bookmark}
-            handleClickBookmark={handleClickBookmark}
-            handleSelectBookmark={(event) => handleSelectBookmark(event, index)}
+            onClickBookmark={onClickBookmark}
+            onSelectBookmark={() => onSelectChange(index)}
           />
         );
       })}
-    </ul>
+    </Bookmarks>
   );
 }
 

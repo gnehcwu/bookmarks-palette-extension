@@ -72,10 +72,14 @@ chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
   }
 });
 
-chrome.runtime.onMessage.addListener((request) => {
+chrome.runtime.onMessage.addListener((request, _, sendResponse) => {
   const { action, url } = request || {};
 
   if (action === 'bp-open-bookmark-from-palette') {
-    chrome.tabs.create({ url, active: true });
+    chrome.tabs.create({ url, active: true }).then(({ openerTabId }) => {
+      sendResponse({ openerTabId });
+    });
+
+    return true;
   }
 });

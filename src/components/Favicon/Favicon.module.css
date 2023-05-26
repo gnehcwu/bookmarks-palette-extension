@@ -1,6 +1,0 @@
-#bpFavicon {
-  all: initial;
-  --favicon-size: 18px;
-  width: var(--favicon-size);
-  height: var(--favicon-size);
-}

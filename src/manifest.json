@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bookmarks palette",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Search and navigate bookmarks by title, domain with a simple command palette interface.",
   "icons": {
     "16": "./assets/icon.png",
