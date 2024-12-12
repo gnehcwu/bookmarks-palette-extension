@@ -1,2 +1,0 @@
-export const DEFAULT_RECORDS_SHOWN = 50;
-export const DEFAULT_MINIMUM_MATCH = 2;
