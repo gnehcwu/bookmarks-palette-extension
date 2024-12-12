@@ -1,13 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled from "styled-components";
 
-Filter.propTypes = {
-  filter: PropTypes.string,
-  handleFilterChange: PropTypes.func,
-};
-
-const Form = styled.form`
+export const Form = styled.form`
   position: relative;
   margin: 0px;
   display: flex;
@@ -16,7 +9,7 @@ const Form = styled.form`
   border-bottom: 1px solid var(--bp-extension-separator);
 `;
 
-const Input = styled.input.attrs(() => ({
+export const Input = styled.input.attrs(() => ({
   type: 'text',
   autoComplete: 'off',
 }))`
@@ -44,22 +37,3 @@ const Input = styled.input.attrs(() => ({
     outline: none;
   }
 `;
-
-function Filter({ filter, handleFilterChange }) {
-  function handleInput(event) {
-    const inputValue = event.target.value;
-    handleFilterChange(inputValue);
-  }
-
-  return (
-    <Form>
-      <Input
-        placeholder={'Type to search bookmarks by title, domain'}
-        value={filter}
-        onChange={handleInput}
-      />
-    </Form>
-  );
-}
-
-export default Filter;
